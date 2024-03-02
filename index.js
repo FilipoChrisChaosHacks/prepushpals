@@ -8,14 +8,11 @@ const hooksDir = path.join(projectRoot, '.git', 'hooks');
 const preCommitHookPath = path.join(hooksDir, 'pre-commit');
 const configFilePath = path.join(projectRoot, '.hookconfig.json');
 
-// Get the path to run-hooks.js relative to the current script's location
-const runHooksPath = path.join(__dirname, '..', 'node_modules', 'prepushpals', 'run-hooks.js');
-
 // Now, safely create or modify the pre-commit hook
 try {
   // Check if pre-commit hook already exists, if not, create it
   if (!fs.existsSync(preCommitHookPath)) {
-    const hookScriptContent = `#!/bin/sh\nnode "${runHooksPath}"`;
+    const hookScriptContent = `node "${configFilePath}"`;
     fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
     console.log('Pre-commit hook installed successfully.');
   }
