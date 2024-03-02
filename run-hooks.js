@@ -48,7 +48,7 @@ config.checks.forEach(check => {
 
             const projectPrettierConfigPath = path.join(projectRoot, '.prettierrc');
             if (!fs.existsSync(projectPrettierConfigPath)) {
-                const prettierConfigPath = 'config/.prettierrc'
+                const prettierConfigPath = path.join(projectRoot, 'node_modules', 'prepushpals', 'config', '.prettierrc')
                 copyFile(prettierConfigPath, projectPrettierConfigPath);
             }
 
