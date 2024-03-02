@@ -14,12 +14,7 @@ try {
   if (!fs.existsSync(preCommitHookPath)) {
     const hookScriptContent = `
     #!/bin/sh
-
-    # Extract the flag from the commit message
-    FLAG=$(git log -1 --pretty=%B | grep -o -- '--chaos')
-
-    # Pass the flag to the run-hooks.js script
-    if [ -n "$FLAG" ]; then
+    if git log -1 --pretty=%B | grep -q -- '--chaos'; then
       node ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')} --chaos
     else
       node ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')}
