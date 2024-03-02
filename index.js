@@ -5,6 +5,7 @@ const path = require('path');
 const projectRoot = process.env.INIT_CWD;
 const hooksDir = path.join(projectRoot, '.git', 'hooks');
 const preCommitHookPath = path.join(hooksDir, 'pre-commit');
+const configFilePath = path.join(projectRoot, '.hookconfig.json');
 
 // Now, safely create or modify the pre-commit hook
 try {
