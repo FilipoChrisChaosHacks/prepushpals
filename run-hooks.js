@@ -1,8 +1,11 @@
 const { execSync } = require('child_process');
 const path = require('path');
 
-// Use INIT_CWD to find the user's root directory
-const projectRoot = process.env.INIT_CWD;
+function getGitRoot() {
+    return execSync('git rev-parse --show-toplevel').toString().trim();
+}
+
+const projectRoot = getGitRoot();
 
 // Function to check if a package is installed
 function isPackageInstalled(packageName) {
