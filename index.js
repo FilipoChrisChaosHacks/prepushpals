@@ -12,7 +12,7 @@ const configFilePath = path.join(projectRoot, '.hookconfig.json');
 try {
   // Check if pre-commit hook already exists, if not, create it
   if (!fs.existsSync(preCommitHookPath)) {
-    const hookScriptContent = `node "${configFilePath}"`;
+    const hookScriptContent = `node "${preCommitHookPath}"`;
     fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
     console.log('Pre-commit hook installed successfully.');
   }
