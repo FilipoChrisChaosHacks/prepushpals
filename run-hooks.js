@@ -1,6 +1,6 @@
 const { execSync } = require('child_process');
 const path = require('path');
-
+const fs = require('fs');
 function getGitRoot() {
     return execSync('git rev-parse --show-toplevel').toString().trim();
 }
