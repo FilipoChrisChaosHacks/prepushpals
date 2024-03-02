@@ -27,6 +27,11 @@ function ensurePackageInstalled(packageName) {
     }
 }
 
+function copyFile(source, destination) {
+    fs.copyFileSync(source, destination);
+    console.log(`Copied ${source} to ${destination}`);
+}
+
 // Now let's require the config from the user's project root
 const configPath = path.join(projectRoot, '.hookconfig.json');
 const config = require(configPath);
@@ -40,6 +45,13 @@ config.checks.forEach(check => {
         } else if (check === 'prettier') {
             // Ensure Prettier is installed at the user's project root
             ensurePackageInstalled('prettier');
+
+            const projectPrettierConfigPath = path.join(projectRoot, '.prettierrc');
+            if (!fs.existsSync(projectPrettierConfigPath)) {
+                const prettierConfigPath = 'config/.prettierrc'
+                copyFile(prettierConfigPath, projectPrettierConfigPath);
+            }
+
             execSync('prettier --check .', { stdio: 'inherit', cwd: projectRoot });
         }
         // Add additional checks here
