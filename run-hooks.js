@@ -52,7 +52,7 @@ config.checks.forEach(check => {
                 copyFile(prettierConfigPath, projectPrettierConfigPath);
             }
 
-            execSync('prettier --fix .', { stdio: 'inherit', cwd: projectRoot });
+            execSync('prettier --write .', { stdio: 'inherit', cwd: projectRoot });
         }
         // Add additional checks here
     } catch (error) {
