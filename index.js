@@ -6,17 +6,21 @@ const projectRoot = process.env.INIT_CWD;
 const hooksDir = path.join(projectRoot, '.git', 'hooks');
 const preCommitHookPath = path.join(hooksDir, 'pre-commit');
 
-// Ensure the .git/hooks directory exists
-if (!fs.existsSync(hooksDir)) {
-  console.log(`Creating directory: ${hooksDir}`);
-  fs.mkdirSync(hooksDir, { recursive: true });
-}
-
 // Now, safely create or modify the pre-commit hook
 try {
-  const hookScriptContent = `#!/bin/sh\nnode ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')}`;
-  fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
-  console.log('Pre-commit hook installed successfully.');
+  // Check if pre-commit hook already exists, if not, create it
+  if (!fs.existsSync(preCommitHookPath)) {
+    const hookScriptContent = `#!/bin/sh\nnode ${path.join(process.cwd(), 'node_modules', 'prepushpals', 'run-hooks.js')}`;
+    fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
+    console.log('Pre-commit hook installed successfully.');
+  }
+
+  if (!fs.existsSync(configFilePath)) {
+    const defaultConfig = {
+      checks: ['prettier', 'eslint'],
+    };
+    fs.writeFileSync(configFilePath, JSON.stringify(defaultConfig, null, 2));
+  }
 } catch (error) {
   console.error('Error installing pre-commit hook:', error);
 }
