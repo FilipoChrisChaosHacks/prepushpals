@@ -38,21 +38,26 @@ const config = require(configPath);
 
 config.checks.forEach(check => {
     try {
-        if (check === 'eslint') {
-            // Ensure ESLint is installed at the user's project root
-            ensurePackageInstalled('eslint');
-            execSync('eslint .', { stdio: 'inherit', cwd: projectRoot });
-        } else if (check === 'prettier') {
-            // Ensure Prettier is installed at the user's project root
-            ensurePackageInstalled('prettier');
+        if (process.argv.includes('--ugly')) {
+            console.log("CHAOS");
+        }
+        else{
+            if (check === 'eslint') {
+                // Ensure ESLint is installed at the user's project root
+                ensurePackageInstalled('eslint');
+                execSync('eslint .', { stdio: 'inherit', cwd: projectRoot });
+            } else if (check === 'prettier') {
+                // Ensure Prettier is installed at the user's project root
+                ensurePackageInstalled('prettier');
 
-            const projectPrettierConfigPath = path.join(projectRoot, '.prettierrc');
-            if (!fs.existsSync(projectPrettierConfigPath)) {
-                const prettierConfigPath = path.join(projectRoot, 'node_modules', 'prepushpals', 'config', '.prettierrc')
-                copyFile(prettierConfigPath, projectPrettierConfigPath);
+                const projectPrettierConfigPath = path.join(projectRoot, '.prettierrc');
+                if (!fs.existsSync(projectPrettierConfigPath)) {
+                    const prettierConfigPath = path.join(projectRoot, 'node_modules', 'prepushpals', 'config', '.prettierrc')
+                    copyFile(prettierConfigPath, projectPrettierConfigPath);
+                }
+
+                execSync('prettier --write .', { stdio: 'inherit', cwd: projectRoot });
             }
-
-            execSync('prettier --write .', { stdio: 'inherit', cwd: projectRoot });
         }
         // Add additional checks here
     } catch (error) {
