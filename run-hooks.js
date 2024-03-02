@@ -21,7 +21,7 @@ function isPackageInstalled(packageName) {
 function ensurePackageInstalled(packageName) {
     if (!isPackageInstalled(packageName)) {
         console.log(`${packageName} is not installed. Installing at project root...`);
-        execSync(`npm install ${packageName}`, { stdio: 'inherit', cwd: projectRoot });
+        execSync(`npm install --save-dev ${packageName}`, { stdio: 'inherit', cwd: projectRoot });
     } else {
         console.log(`${packageName} is already installed at the project root.`);
     }
