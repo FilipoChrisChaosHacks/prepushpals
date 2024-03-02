@@ -19,5 +19,5 @@
   "homepage": "https://github.com/FilipoChrisChaosHacks/prepushpals#readme",
   "bin": {
     "git-hook-manager": "./bin/git-hook-manager"
-  },
+  }
 }
