@@ -14,7 +14,7 @@ if (!fs.existsSync(hooksDir)) {
 
 // Now, safely create or modify the pre-commit hook
 try {
-  const hookScriptContent = `#!/bin/sh\nnode ${path.join(projectRoot, 'node_modules', '<package-name>', 'run-hooks.js')}`;
+  const hookScriptContent = `#!/bin/sh\nnode ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')}`;
   fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
   console.log('Pre-commit hook installed successfully.');
 } catch (error) {
