@@ -1,0 +1,7 @@
+{
+  "checks": [
+    "prettier",
+    "eslint",
+    "chaos"
+  ]
+}
