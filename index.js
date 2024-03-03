@@ -12,14 +12,7 @@ const configFilePath = path.join(projectRoot, '.hookconfig.json');
 try {
   // Check if pre-commit hook already exists, if not, create it
   if (!fs.existsSync(preCommitHookPath)) {
-    const hookScriptContent = `
-    #!/bin/sh
-    if git log -1 --pretty=%B | grep -q -- '--chaos'; then
-      node ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')} --chaos
-    else
-      node ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')}
-    fi
-    `;
+    const hookScriptContent = `#!/bin/sh node ${path.join(projectRoot, 'node_modules', 'prepushpals', 'run-hooks.js')}`;
 
     fs.writeFileSync(preCommitHookPath, hookScriptContent, { mode: '755' });
     console.log('Pre-commit hook installed successfully.');
