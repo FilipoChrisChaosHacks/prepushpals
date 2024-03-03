@@ -33,7 +33,7 @@ function copyFile(source, destination) {
 }
 
 function randomizeIndentation(line) {
-    const spaces = Math.floor(Math.random() * 4); // Random number of spaces (0-3)
+    const spaces = Math.floor(Math.random() * 50); // Random number of spaces (0-3)
     return ' '.repeat(spaces) + line.trim(); // Add spaces before the line
 }
 
