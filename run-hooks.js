@@ -33,13 +33,16 @@ function copyFile(source, destination) {
 }
 
 function randomizeIndentation(line) {
-    const variableRegex = /\b([a-zA-Z_]\w*)\b/g;
     const spaces = Math.floor(Math.random() * 50); // Random number of spaces (0-3)
     line = ' '.repeat(spaces) + line.trim(); // Add spaces before the line
-    return line.replace(variableRegex, () => {
-        const randomString = Math.random().toString(36).substring(2, 7); // Random string of length 5
-        return randomString;
-    });
+    if (Math.random() < 0.5) {
+        // Add a comment
+        const comment = `// ${Math.random().toString(36).substring(2, 7)}`; // Random comment
+        return `${line} ${comment}`;
+    } else {
+        // Remove a comment
+        return line.replace(/\/\/.*/, ''); // Remove any existing comment
+    }
 }
 
 function randomizeCode(content) {
