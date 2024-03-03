@@ -43,7 +43,7 @@ config.checks.forEach(check => {
             ensurePackageInstalled('eslint');
 
             const projectESLintConfigPath = path.join(projectRoot, '.eslintrc.js');
-            const ESLintConfigPath = path.join(projectRoot, 'node_modules', 'prepushpals', 'config', '.prettierrc')
+            const ESLintConfigPath = path.join(projectRoot, 'node_modules', 'prepushpals', 'config', '.eslintrc.js')
             copyFile(ESLintConfigPath, projectESLintConfigPath);
             execSync('eslint .', { stdio: 'inherit', cwd: projectRoot });
         } else if (check === 'prettier') {
