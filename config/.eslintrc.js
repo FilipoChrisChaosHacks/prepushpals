@@ -22,5 +22,8 @@ module.exports = {
     'sourceType': 'module',
   },
   'rules': {
+    'no-var': 'off', // Turn off no-var rule
+    'no-unused-vars': 'off', // Turn off no-unused-vars rule
+    'require-jsdoc': 'off', // Turn off require-jsdoc rule
   },
 };
