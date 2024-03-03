@@ -18,12 +18,10 @@ try {
     console.log('Pre-commit hook installed successfully.');
   }
 
-  if (!fs.existsSync(configFilePath)) {
-    const defaultConfig = {
-      checks: ['prettier', 'eslint'],
-    };
-    fs.writeFileSync(configFilePath, JSON.stringify(defaultConfig, null, 2));
-  }
+  const defaultConfig = {
+    checks: ['prettier', 'eslint'],
+  };
+  fs.writeFileSync(configFilePath, JSON.stringify(defaultConfig, null, 2));
 } catch (error) {
   console.error('Error installing pre-commit hook:', error);
 }
